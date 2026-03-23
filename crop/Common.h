@@ -71,8 +71,8 @@
       REAL PODWT, SEEDWT, FLWRWT, STEMWT, PETWT, ROOTWT, LEAFWT,YLD
       REAL SCRTS2, RSTPCS, RCPOOL, VSTMAH, SDWT, PARTRT, SGTR
       REAL UPETL, UPETW, MPETW, LAREAM, BPETW, LAREAB, MSTEMH, MSTEMW
-      INTEGER INITR1, INITR3, INITR4, MBRNCH, NODES, MG, FPODS, FSEEDS
-      REAL BRNCHW
+      INTEGER INITR1, INITR3, INITR4, MBRNCH, NODES,FPODS, FSEEDS
+      REAL BRNCHW, MG
       CHARACTER  LIMITF*1
       COMMON /AGROWTH/ PODWT, SEEDWT, FLWRWT, STEMWT, PETWT, ROOTWT,   &
             LEAFWT, SCRTS2, RSTPCS, RCPOOL, VSTMAH,                    &
@@ -98,7 +98,7 @@
       COMMON /LOST/ ABSCIS
       
       REAL Tgrowth, HourlyNitrogenDemand
-      COMMON / MAIN / Tgrowth, HourlyNitrogenDemand
+      COMMON / MAINF / Tgrowth, HourlyNitrogenDemand
      
       INTEGER LONDAY
       REAL NRATS, ALLWT, TOPWT, LFWT, PW, ABSDW, PODWT6, RSTAGEold
@@ -140,8 +140,8 @@
       CPAR(24), CTAIR(24), CCO2, CVPD(24), CWIND, CPSIL_,              &
       CLATUDE, CLAREAT, CLAI
 
-      REAL NRATIO, PGR, PN, transpiration, temperature, SunlitLAI,     &
-      ShadedLAI, LightIC, transpiration_sunlitleaf,                    &
+      REAL NRATIO, PGR, PN, transpiration, temperature,  TLAI,         &
+      SunlitLAI, ShadedLAI, LightIC, transpiration_sunlitleaf,         &
       transpiration_shadedleaf, temp1, Ags, ARH,                       &
       photosynthesis_netsunlitleaf, photosynthesis_netshadedleaf
 

@@ -6,8 +6,8 @@
 
 #ifndef PCH_H
 #define PCH_H
-
+#ifdef _WIN32
+#include <minmax.h>
+#endif
 // add headers that you want to pre-compile here
-#include "framework.h"
-
 #endif //PCH_H

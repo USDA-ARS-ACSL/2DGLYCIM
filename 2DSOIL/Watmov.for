@@ -378,7 +378,10 @@ c    pond  on  the soil-atmosphere surface
 cMisha 18/9 2006
 cMK----------------------------------------------------------------------------------     
  
-
+C This code implements a physically realistic, numerically stable boundary condition for ponded infiltration at the soil surface. 
+C It uses smooth approximations of the Heaviside and Dirac delta functions to handle the transition between non-ponded and ponded conditions, 
+C ensuring the model can handle the sudden onset of surface ponding without numerical instability. 
+C The updates to A and B ensure the finite element system correctly represents the water flux due to ponding at the boundary.
 
 		if ((CodeW(n).eq.-4).and.(q(n).gt.0)) then
 c Ponded infiltration measurement is from Misha Kouznetzov

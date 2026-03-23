@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VisualStudioProject ProjectCreator="Intel Fortran" Keyword="Console Application - Converted from CVF" Version="11.0" ProjectIdGuid="{05500875-9B63-45CA-B7D6-FD6A5240ED1A}">
+<VisualStudioProject ProjectCreator="Intel Fortran" Keyword="Console Application - Converted from CVF" Version="11.0" ProjectIdGuid="{05500875-9B63-45CA-B7D6-FD6A5240ED1A}" SccProjectName="SAK" SccLocalPath="SAK" SccAuxPath="SAK" SccProvider="SAK">
 	<Platforms>
 		<Platform Name="Win32"/>
 		<Platform Name="x64"/>
 	</Platforms>
 	<Configurations>
-		<Configuration Name="Debug|Win32" UseCompiler="ifortCompiler" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)">
+		<Configuration Name="Debug|Win32" UseCompiler="ifortCompiler" OutputDirectory="$(PorjectDir)\$(ConfigurationName)" IntermediateDirectory="$(PorjectDir)\$(ConfigurationName)" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)">
 			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" InlineFunctionExpansion="expandOnlyInline" Preprocess="preprocessYes" WarnTruncateSource="true" LocalSavedScalarsZero="true" InitArrays="true" RoundFloatingPointResults="true" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" Traceback="true" BoundsCheck="true" RuntimeLibrary="rtMultiThreadedDebug" WarnArgMismatch="true"/>
 			<Tool Name="VFLinkerTool" AdditionalOptions="/MACHINE:I386 " Version="1.14" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" ProgramDatabaseFile="$(OUTDIR)/2dsoil.pdb" SubSystem="subSystemConsole" AdditionalDependencies="&quot;$(SolutionDir)Crop\Debug\GLYCIM.lib&quot;"/>
 			<Tool Name="VFResourceCompilerTool" PreprocessorDefinitions="_DEBUG" Culture="rcEnglishUS" ResourceOutputFileName="$(INTDIR)/$(InputName).res"/>
@@ -38,9 +38,9 @@
 			<Tool Name="VFPostBuildEventTool" CommandLine="echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;D:\MAIZSIM07\AgMIPET2&quot;&#xA;echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;D:\MAIZSIM07\Kansas&quot;&#xA;echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;D:\MAIZSIM07\Crown&quot;"/>
 			<Tool Name="VFManifestTool" SuppressStartupBanner="true"/>
 		</Configuration>
-		<Configuration Name="Debug|x64" UseCompiler="ifortCompiler" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)">
-			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" InlineFunctionExpansion="expandOnlyInline" Preprocess="preprocessYes" WarnTruncateSource="true" LocalSavedScalarsZero="true" InitArrays="true" RoundFloatingPointResults="true" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" Traceback="true" BoundsCheck="true" RuntimeLibrary="rtMultiThreadedDebug" WarnArgMismatch="true"/>
-			<Tool Name="VFLinkerTool" Version="1.14" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" ProgramDatabaseFile="$(OUTDIR)/2dsoil.pdb" SubSystem="subSystemConsole" AdditionalDependencies="&quot;$(SolutionDir)crop\$(Platform)\$(Configuration)\GLYCIM.lib&quot;"/>
+		<Configuration Name="Debug|x64" UseCompiler="ifxCompiler" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)">
+			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" Preprocess="preprocessYes" PreprocessorDefinitions="_DEBUG" WarnTruncateSource="true" LocalSavedScalarsZero="true" InitArrays="true" RoundFloatingPointResults="true" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)\" ObjectFile="$(INTDIR)\" AssemblerListingLocation="$(INTDIR)/" Traceback="true" NullPointerCheck="true" BoundsCheck="true" ArrayShapeCheck="true" UninitializedVariablesCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebug" WarnArgMismatch="true"/>
+			<Tool Name="VFLinkerTool" Version="1.14" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" AssemblyDebug="linkAssemblyDebugFull" SubSystem="subSystemConsole" AdditionalDependencies="&quot;$(SolutionDir)Plant\$(PlatformName)\$(ConfigurationName)\GLYCIM.lib&quot;"/>
 			<Tool Name="VFResourceCompilerTool" PreprocessorDefinitions="_DEBUG" Culture="rcEnglishUS" ResourceOutputFileName="$(INTDIR)/$(InputName).res"/>
 			<Tool Name="VFMidlTool" SuppressStartupBanner="true" TargetEnvironment="midlTargetAMD64" TypeLibraryName="$(OUTDIR)/2dsoil.tlb"/>
 			<Tool Name="VFCustomBuildTool"/>
@@ -50,8 +50,8 @@
 			<Tool Name="VFManifestTool" SuppressStartupBanner="true"/>
 		</Configuration>
 		<Configuration Name="Release|x64" UseCompiler="ifxCompiler" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)">
-			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" BufferedIO="true" Preprocess="preprocessYes" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="precise" FloatingPointSpeculation="fpSpeculationSafe" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" RuntimeLibrary="rtMultiThreadedDebug"/>
-			<Tool Name="VFLinkerTool" OutputFile="$(OUTDIR)/$(TargetName)$(TargetExt)" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" ProgramDatabaseFile="$(OUTDIR)/2dsoil.pdb" SubSystem="subSystemConsole" AdditionalDependencies="&quot;$(SolutionDir)crop\$(Platform)\$(Configuration)\GLYCIM.lib&quot;"/>
+			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" BufferedIO="true" Preprocess="preprocessYes" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="precise" FloatingPointSpeculation="fpSpeculationSafe" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" RuntimeLibrary="rtMultiThreadedDebug"/>
+			<Tool Name="VFLinkerTool" OutputFile="$(OUTDIR)/$(TargetName)$(TargetExt)" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" ProgramDatabaseFile="$(OUTDIR)/2dsoil.pdb" SubSystem="subSystemConsole" AdditionalDependencies="&quot;$(SolutionDir)Plant\$(PlatformName)\$(ConfigurationName)\GLYCIM.lib&quot;"/>
 			<Tool Name="VFResourceCompilerTool" PreprocessorDefinitions="NDEBUG" Culture="rcEnglishUS" ResourceOutputFileName="$(INTDIR)/$(InputName).res"/>
 			<Tool Name="VFMidlTool" SuppressStartupBanner="true" TargetEnvironment="midlTargetAMD64" TypeLibraryName="$(OUTDIR)/2dsoil.tlb"/>
 			<Tool Name="VFCustomBuildTool"/>
@@ -71,12 +71,56 @@
 			<Tool Name="VFPostBuildEventTool" CommandLine="echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;D:\MAIZSIM07\AgMIPET2&quot;&#xA;echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;D:\MAIZSIM07\Kansas&quot;&#xA;echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;D:\MAIZSIM07\Crown&quot;"/>
 			<Tool Name="VFManifestTool" SuppressStartupBanner="true"/>
 		</Configuration>
+		<Configuration Name="Release_Classim|Win32" UseCompiler="ifortCompiler" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)">
+			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" BufferedIO="true" Preprocess="preprocessYes" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="precise" FloatingPointSpeculation="fpSpeculationSafe" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" RuntimeLibrary="rtMultiThreadedDebug"/>
+			<Tool Name="VFLinkerTool" AdditionalOptions="/MACHINE:I386" OutputFile="$(OUTDIR)/$(TargetName)$(TargetExt)" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" ProgramDatabaseFile="$(OUTDIR)/2dsoil.pdb" SubSystem="subSystemConsole" AdditionalDependencies="&quot;$(SolutionDir)crop\release\GLYCIM.lib&quot;"/>
+			<Tool Name="VFResourceCompilerTool" PreprocessorDefinitions="NDEBUG" Culture="rcEnglishUS" ResourceOutputFileName="$(INTDIR)/$(InputName).res"/>
+			<Tool Name="VFMidlTool" SuppressStartupBanner="true" TypeLibraryName="$(OUTDIR)/2dsoil.tlb"/>
+			<Tool Name="VFCustomBuildTool"/>
+			<Tool Name="VFPreLinkEventTool"/>
+			<Tool Name="VFPreBuildEventTool"/>
+			<Tool Name="VFPostBuildEventTool" CommandLine="echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim\2DGLYCIM.EXE&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim_dev\2DGLYCIM.EXE&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;X:\Modeling\MAIZSIMInterface\Interface programs and files\Crop Models\GLYCIM Files\2DGLYCIM.EXE&quot;"/>
+			<Tool Name="VFManifestTool" SuppressStartupBanner="true" VerboseOutput="true"/>
+		</Configuration>
+		<Configuration Name="Release_Classim|x64" UseCompiler="ifxCompiler" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)">
+			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" BufferedIO="true" Preprocess="preprocessYes" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="precise" FloatingPointSpeculation="fpSpeculationSafe" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" RuntimeLibrary="rtMultiThreadedDebug"/>
+			<Tool Name="VFLinkerTool" OutputFile="$(OUTDIR)/$(TargetName)$(TargetExt)" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" ProgramDatabaseFile="$(OUTDIR)/2dsoil.pdb" SubSystem="subSystemConsole" AdditionalDependencies="&quot;$(SolutionDir)Plant\$(PlatformName)\$(ConfigurationName)\GLYCIM.lib&quot;"/>
+			<Tool Name="VFResourceCompilerTool" PreprocessorDefinitions="NDEBUG" Culture="rcEnglishUS" ResourceOutputFileName="$(INTDIR)/$(InputName).res"/>
+			<Tool Name="VFMidlTool" SuppressStartupBanner="true" TargetEnvironment="midlTargetAMD64" TypeLibraryName="$(OUTDIR)/2dsoil.tlb"/>
+			<Tool Name="VFCustomBuildTool"/>
+			<Tool Name="VFPreLinkEventTool"/>
+			<Tool Name="VFPreBuildEventTool"/>
+			<Tool Name="VFPostBuildEventTool" CommandLine="echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim\2DGLYCIM.EXE&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim_dev\2DGLYCIM.EXE&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;X:\Modeling\MAIZSIMInterface\Interface programs and files\Crop Models\GLYCIM Files\2DGLYCIM.EXE&quot;"/>
+			<Tool Name="VFManifestTool" SuppressStartupBanner="true" VerboseOutput="true"/>
+		</Configuration>
+		<Configuration Name="Dev_Classim|Win32" UseCompiler="ifortCompiler" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)">
+			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" BufferedIO="true" Preprocess="preprocessYes" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="precise" FloatingPointSpeculation="fpSpeculationSafe" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" RuntimeLibrary="rtMultiThreadedDebug"/>
+			<Tool Name="VFLinkerTool" AdditionalOptions="/MACHINE:I386" OutputFile="$(OUTDIR)/$(TargetName)$(TargetExt)" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" ProgramDatabaseFile="$(OUTDIR)/2dsoil.pdb" SubSystem="subSystemConsole" AdditionalDependencies="&quot;$(SolutionDir)crop\release\GLYCIM.lib&quot;"/>
+			<Tool Name="VFResourceCompilerTool" PreprocessorDefinitions="NDEBUG" Culture="rcEnglishUS" ResourceOutputFileName="$(INTDIR)/$(InputName).res"/>
+			<Tool Name="VFMidlTool" SuppressStartupBanner="true" TypeLibraryName="$(OUTDIR)/2dsoil.tlb"/>
+			<Tool Name="VFCustomBuildTool"/>
+			<Tool Name="VFPreLinkEventTool"/>
+			<Tool Name="VFPreBuildEventTool"/>
+			<Tool Name="VFPostBuildEventTool" CommandLine="echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim\2DGLYCIM.EXE&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim_dev\2DGLYCIM.EXE&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;X:\Modeling\MAIZSIMInterface\Interface programs and files\Crop Models\GLYCIM Files\2DGLYCIM.EXE&quot;"/>
+			<Tool Name="VFManifestTool" SuppressStartupBanner="true" VerboseOutput="true"/>
+		</Configuration>
+		<Configuration Name="Dev_Classim|x64" UseCompiler="ifxCompiler" DeleteExtensionsOnClean="*.obj;*.mod;*.pdb;*.asm;*.map;*.dyn;*.dpi;*.tmp;*.log;*.ilk;*.exe;$(TargetPath)">
+			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" BufferedIO="true" Preprocess="preprocessYes" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="precise" FloatingPointSpeculation="fpSpeculationSafe" CallingConvention="callConventionCVF" ModulePath="$(INTDIR)/" ObjectFile="$(INTDIR)/" AssemblerListingLocation="$(INTDIR)/" RuntimeLibrary="rtMultiThreadedDebug"/>
+			<Tool Name="VFLinkerTool" OutputFile="$(OUTDIR)/$(TargetName)$(TargetExt)" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" ProgramDatabaseFile="$(OUTDIR)/2dsoil.pdb" SubSystem="subSystemConsole" AdditionalDependencies="&quot;$(SolutionDir)Plant\$(PlatformName)\$(ConfigurationName)\GLYCIM.lib&quot;"/>
+			<Tool Name="VFResourceCompilerTool" PreprocessorDefinitions="NDEBUG" Culture="rcEnglishUS" ResourceOutputFileName="$(INTDIR)/$(InputName).res"/>
+			<Tool Name="VFMidlTool" SuppressStartupBanner="true" TargetEnvironment="midlTargetAMD64" TypeLibraryName="$(OUTDIR)/2dsoil.tlb"/>
+			<Tool Name="VFCustomBuildTool"/>
+			<Tool Name="VFPreLinkEventTool"/>
+			<Tool Name="VFPreBuildEventTool"/>
+			<Tool Name="VFPostBuildEventTool" CommandLine="echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim_dev\2DGLYCIM.EXE&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;X:\Modeling\MAIZSIMInterface\Interface programs and files\Crop Models\GLYCIM Files\Dev\2DGLYCIM.EXE&quot;"/>
+			<Tool Name="VFManifestTool" SuppressStartupBanner="true" VerboseOutput="true"/>
+		</Configuration>
 	</Configurations>
 	<Files>
 		<Filter Name="Header Files" Filter="*.ins;h;hpp;hxx;hm;inl;fi;fd">
 			<File RelativePath="NITVAR.INS"/>
-			<File RelativePath="public.ins"/>
-			<File RelativePath="PUPLANT.INS"/>
+			<File RelativePath=".\public.ins"/>
+			<File RelativePath=".\PUPLANT.INS"/>
 			<File RelativePath=".\PuSurface.ins"/>
 			<File RelativePath=".\PUWEATH.INS"/>
 		</Filter>
@@ -105,13 +149,13 @@
 			<File RelativePath="ERRMES.FOR"/>
 			<File RelativePath="Ex14-5.for"/>
 			<File RelativePath=".\GasMov.For"/>
-			<File RelativePath="GRID_BND.FOR"/>
+			<File RelativePath=".\GRID_BND.FOR"/>
 			<File RelativePath="HEATMOV.FOR"/>
 			<File RelativePath="hourwea.for"/>
-			<File RelativePath="Init.for"/>
+			<File RelativePath=".\Init.for"/>
 			<File RelativePath=".\Irrigation.for"/>
 			<File RelativePath="MASSBLW.FOR"/>
-			<File RelativePath="MNGMB.FOR"/>
+			<File RelativePath=".\MNGMB.FOR"/>
 			<File RelativePath=".\Mulch_Decomp.for"/>
 			<File RelativePath="N_Massbl.for"/>
 			<File RelativePath="ORTHOFEM.FOR"/>
@@ -129,7 +173,7 @@
 			<File RelativePath=".\solupt_Y1.for"/>
 			<File RelativePath=".\SurfaceMulchProcess.for"/>
 			<File RelativePath=".\surfaceWaterBalanceAdjustment.for"/>
-			<File RelativePath="SYNCHRON.FOR"/>
+			<File RelativePath=".\SYNCHRON.FOR"/>
 			<File RelativePath=".\Tillage.for"/>
 			<File RelativePath=".\wateruptake.FOR"/>
 			<File RelativePath=".\Watmov.for"/>

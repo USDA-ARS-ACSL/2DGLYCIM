@@ -14,7 +14,7 @@
 	 
   
    Write(*,*)'************************ GLYCIM ***********************'  
-   Write(*,*)'*                    Version 9.1.0                    *'  
+   Write(*,*)'*                    Version 9.1.1                    *'  
    Write(*,*)'*                                                     *'  
    Write(*,*)'*  A DYNAMIC SIMULATOR FOR SOYBEAN CROPS ORIGINALLY   *'  
    Write(*,*)'*  CREATED BY BASIL ACOCK AND SUBSEQUENTLY IMPROVED   *'  
@@ -67,7 +67,7 @@
 	  "PFD", "SolRad", "Tair", "Tcan", "Pgross", "Pnet", "gs", "PSIL",&
 	  "LAI", "LAREAT", "totalDM", "rootDM", "stemDM", "leafDM",	      &
 	  "seedDM", "podDM", "DeadDM", "Tr_pot", "Tr_act", "wstress", 	  &
-	  "Nstress", "Limit"
+	  "Nstress","N_Dem","NUPt", "Limit"
 	 
 	  !Write(86,6) "date", "DayOfYear", "Time", "CWAD", "GWAD",		  &
 	  !"PN", "Ags", "Canopy T"
@@ -78,7 +78,7 @@
       Write(88,8) "date", "jday","time", "wstress", "Nstress",        &
 	              "Cstress", "NEffect_veg", "wstress2"
 	 
-5	  FORMAT (A10, 26(",",A10))
+5	  FORMAT (A10, 28(",",A10))
 6	  FORMAT (6(A10))
 7	  FORMAT (A10, 13(",",A10))
 8	  FORMAT (A10, 7(",",A10))

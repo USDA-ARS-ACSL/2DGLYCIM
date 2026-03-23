@@ -1,14 +1,30 @@
 
   !DEC$ ATTRIBUTES DLLIMPORT :: ShootR
   !DEC$ ATTRIBUTES DLLIMPORT :: ShtR_public
-	  REAL PCRL, PCRQ,PCRS,PCRTS,ET_demand,LCAI,COVER,CONVR
+   
+        
+      REAL PCRL, PCRQ, PCRS, ET_demand, LCAI, COVER,  CONVR,    
+     !   MaxRootDepth,  SHADE, HEIGHT, LAI, AWUPS, 
+	 !	  NitroDemand, xBSTEM, yBSTEM, SGT, PSIM,
+     !    LAREAT, POPROW,ROWSP, ROWANG, PopArea, 
+     !    CEC, EORSCS, AWUPSS, SOLRAD, 
+     !    Total_Eor, Total_Pcrs, sincrsink, PSILD, 
+     !    OSMFAC, EOMULT, PSIL_  NDemandError, 
+     !    CumulativeNDemandError, InitialRootCarbo,PCTRS,
+     !    ConstI(2),constK(2), Cmin0(2) 
+     
+       
 	  Real(8) HourlyCarboUsed, TotalRootWeight
-      REAL(4) SHADE,HEIGHT,LAI,AWUPS,NitroDemand,NDemandError
-	  REAL LAREAT, MaxRootDepth, InitialRootCarbo
+      integer isGerminated, isEmerged
+      Real currentWUP					
+
+
+	  
+
       REAL cContentRootY,nContentRootY,cContentRootM,nContentRootM
-	  integer isGerminated, isEmerged
+	
 ! includes variables shared with crop model	 
-      Common /ShootR/   PCRL,PCRQ,PCRS,HourlyCarboUsed, ET_demand,
+      Common / ShootR /   PCRL,PCRQ,PCRS,HourlyCarboUsed, ET_demand,
      !                  LCAI,COVER,CONVR,
      !                  MaxRootDepth,SHADE,HEIGHT,LAI,AWUPS,
      !                  NitroDemand,xBSTEM,yBSTEM,SGT,PSIM,
@@ -18,10 +34,16 @@
      !                  OSMFAC,EOMULT,PSIL_,NDemandError, 
      !                  CumulativeNDemandError,TotalRootWeight,
      !                  InitialRootCarbo, PCRTS,
-     !                  ConstI(2),constK(2), Cmin0(2),
+     !                  ConstI,constK, Cmin0,
      !                  isGerminated, isEmerged
         
-   
+       REAL RVR, AWUP, PSISM, PSILT, EOR, YRL, RGCF,                       
+     !          PSIS, TS, COND, PDWR, DRL, WUPM, WUPN, WUPT, TPL, PPDRL, 
+     !          ADWR, AWR, ADRL, RTWL, ALPY,
+     !       WidthE, HeightE, PILD, VMAX, vegsrc, potential_T, potential_T_EO, 
+     !         AWUPS_old, WUPMS, EORSCF, WUPDS, WUP2S, WUP0S, DPSI02, SCF, 
+     !       PSIST, PROPAR, VUP, FUP
+
 ! includes variables only used inside 2dsoil	                 
       Common /shtR_public/ RVR(NumNPD), AWUP(NumELD),PSISM,PSILT,EOR,
      !                     YRL(NumNPD), RGCF(NumNPD),iFavRoot(NumNPD),
@@ -30,7 +52,7 @@
      !                     DRL(NumNPD),WUPM(NumNPD),
      !                     WUPN(NumNPD),WUPT(NumNPD),TPL,PPDRL(NumNPD),
      !                     ADWR(NumNPD), AWR(NumNPD), ADRL(NumNPD),RTWL,
-     !                     RtMinWtPerUnitArea,Wl,Wa,Wr,Wb,ALPY,
+     !                     ALPY,
      !                     WidthE(NumEld),HeightE(NumEld),
      !                     PILD,VMAX,vegsrc, potential_T,
      !                     potential_T_EO,

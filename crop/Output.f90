@@ -12,7 +12,8 @@
      REAL CWAD, GWAD, PWAD, LWAD, SWAD, AWAD, HIAD, SLAD, GWGD, GAD, difference
      REAL CumulativeNUptake, CumulativeNDemand,Pgday,Pnday
 
-     common /output_G/ CumulativeNUptake, CumulativeNDemand,Pgday,Pnday
+     common /output_G/ CumulativeNUptake, CumulativeNDemand,Pgday,    &
+            Pnday, date1
   
 	    If (lInput .eq. 1) then
           CumulativeNUptake=0.0
@@ -124,23 +125,29 @@
 		Write(85,7) date1, iday1, 23, RSTAGE, VSTAGE, Parave, Sradave,    &
 		              Tdayave, Tcanave, Pgday, Pnday, gsmax, psilave, LAI,		&
 					  LAREAT, ALLWT, ROOTWT, STEMWT, LFWT, SeedWT, PodWt, ABSDW,&
-			          daypotet, dayactet, wstressave, nstressave, LIMITF(12)
+			          daypotet, dayactet, wstressave, nstressave,               &
+                        CumulativeNUptake/1000.0,                      &
+                        CumulativeNDemand/1000.0,                      &
+                        LIMITF(12) 
 					  
 	   end if 
 	  
 	  ! g01 Hourly output
        If(HourlyOutput.eq.1) then 
-	      If (difference.ge.0.999.or.difference.le.0.001) then	  
-		  iday=int(time)
-          call caldat(iday,mm,id,iyyy) 
-          write (date1,'(i2.2,A1,i2.2,A1,i4.4)') mm,'/',id,'/',iyyy  
-		  end if 
+          If (difference.ge.0.999.or.difference.le.0.001) then	  
+		   iday=int(time)
+             call caldat(iday,mm,id,iyyy) 
+             write (date1,'(i2.2,A1,i2.2,A1,i4.4)') mm,'/',id,'/',iyyy  
+           end if 
 		  hour=int(difference*24 + 0.1)
 		  iday1=int(time)
 		  Write(85,7) date1, iday1, hour, RSTAGE, VSTAGE, PFD, WATTSM(ITIME), &
 		              TAIR(ITIME), temperature, PGROSS, PSNET, Ags, psil_, LAI,	  &
 					  LAREAT, ALLWT, ROOTWT, STEMWT, LFWT, SeedWT, PodWt, ABSDW,  &
-					  POTET, ACTET, WSTRESS, NSTRESS, LIMITF(ITIME)
+					  POTET, ACTET, WSTRESS, NSTRESS,                &
+                        CumulativeNUptake/1000.0,                      &
+                        CumulativeNDemand/1000.0,                      &
+                        LIMITF(ITIME)
 	   end if 
 	
 	  ! daily g02 file
@@ -326,7 +333,7 @@
 		  
 	   end if 
 	  
-7	   FORMAT (A12, (",",I8), (",",I4), 23(",",F15.3), (",",A5))
+7	   FORMAT (A12, (",",I8), (",",I4), 25(",",F15.3), (",",A5))
 8	   FORMAT (I4, 3(",",I4),(",",F12.1), 18(",",F6.1))
 9	   FORMAT (A12, (",",I8), (",",I4), 8(",",F15.3),2(",",F10.5),",",F15.3)	  
 10     FORMAT (A12, (",",I8), (",",I4), 5(",",F15.3))

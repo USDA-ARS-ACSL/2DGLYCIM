@@ -6,7 +6,7 @@ C it is called once a day, at 5:00 am
 
        Subroutine SetBoundary()
          
-       include 'public.ins'
+       use common_public
        include 'puWeath.ins'
 !	 !DEC$ATTRIBUTES DLLIMPORT :: /Weath/, /grid_public/,  
 !     ! /nodal_public/, /elem_public/, /bound_public/, /time_public/,

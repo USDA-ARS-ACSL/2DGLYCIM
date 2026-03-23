@@ -80,9 +80,9 @@
 ! OPEN THE STOMATA FULLY AT DAWN.
 
          SCF = 1.0
-	  END IF
-      
-	  Call GasExchanger(CDayofYear,NRATIO)
+	  END IF 
+      ! pass weather and plant common blocks to GasExchanger
+	  Call gasexchanger(CDayofYear,NRATIO)
 	  
       LIGHT = WATTSM(ITIME).GT.0.0
       IF (LIGHT) THEN

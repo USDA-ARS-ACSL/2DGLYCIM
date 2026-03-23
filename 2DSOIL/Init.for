@@ -2,9 +2,8 @@
       Include 'public.ins'
       Include 'puweath.ins'
       Include 'puplant.ins'
-
-	
-	Character*10 Sowing,Emerge,Ending,Date4,Date1  ! date1 is dummy for beginDay until we modify the itnerface
+      
+      Character*10 Sowing,Emerge,Ending,Date4,Date1  ! date1 is dummy for beginDay until we modify the itnerface
 	Character*256 RootName,T1,T2
       Character*256 extract_path, path,logFile
       Character*80 Indates,test
@@ -175,10 +174,13 @@ c dt
       Sink(:)=0.
       RTWT(:)=0.
       cSink(:,:)=0.
+      cSink_OM(:,:)=0.
       gSink(:,:)=0.
 	gSink_OM=0.
 	gSink_rootY=0.
 	gSink_rootM=0.
+      gSink_N2O=0.
+      SOMMassRatio(:)=1.0
       
 
 * 
@@ -243,10 +245,10 @@ c dt
        do i = len, 1, -1
           if ((filename(i:i) == '\').OR.(filename(i:i) == '/')) then
               path = filename(1:i)
-              if (filename(i:i) == '/') then   ! if windows
+              if (filename(i:i) == '/') then   ! if linux
                   path=path // '/'
                else 
-                 path=path // '\'               ! if linux
+                 path=path // '\'               ! if windows
               end if
              exit
           end if

@@ -53,8 +53,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 8,1,0,0
- PRODUCTVERSION 9,1,0,0
+ FILEVERSION 9,1,1,0
+ PRODUCTVERSION 9,1,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -75,20 +75,20 @@ BEGIN
 #else
     VALUE "FileDescription", "GLYCIM Soybean Crop Model (release)"
 #endif			
-    VALUE "FileVersion", "9.1.0"
+    VALUE "FileVersion", "9.1.1"
 #ifdef _DEBUG
     VALUE "InternalName", "GLYCIM_DEBUG"
 #else
     VALUE "InternalName", "GLYCIM_RELEASE"
 #endif
-    VALUE "LegalCopyright", "Copyright (C) 2024"
+    VALUE "LegalCopyright", "Copyright (C) 2026"
     VALUE "OriginalFilename", "GLYCIM"
 #ifdef _DEBUG
     VALUE "ProductName", "GLYCIM DEBUG"
 #else
     VALUE "ProductName", "GLYCIM RELEASE"
 #endif
-    VALUE "ProductVersion", "9.1.0"
+    VALUE "ProductVersion", "9.1.1"
     END
     END
     BLOCK "VarFileInfo"

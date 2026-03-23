@@ -35,7 +35,8 @@ struct WeatherCommon {
 
 struct PlantCommon {
 
-	float NRATIO, photosynthesis_gross, photosynthesis_net, transpiration, temperature, TLAI, sunlitLAI, shadedLAI, LightIC, transpiration_sunlitleaf, transpiration_shadedleaf,temp1,Ags,ARH, photosynthesis_netsunlitleaf, photosynthesis_netshadedleaf;
+	float NRATIO, photosynthesis_gross, photosynthesis_net, transpiration, temperature, TLAI, sunlitLAI, shadedLAI, LightIC, 
+		transpiration_sunlitleaf, transpiration_shadedleaf,temp1,Ags,ARH, photosynthesis_netsunlitleaf, photosynthesis_netshadedleaf;
 
 };
 

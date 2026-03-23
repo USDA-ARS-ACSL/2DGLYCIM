@@ -15,10 +15,9 @@ c      Real PDWR_TOTAL   !for debugging
       double precision InitialRootWt
       Real RRRM,RRRY; ! root radial resistance for mature and young leaves (s-1 cm-1)     cccz bar day g-1
 	Real RVRL;    !root vascular resistance s-1 cm -1                                   cccz bar day g-1
-	Real RTWL;    !Root weight per unit length (g cm-1)                                 cccz g cm-1
-	Real ALPM,ALPY; !relative growth rates for mature and young roots                   cccz day-1
+	!Real RTWL;    !Root weight per unit length (g cm-1)                                 cccz g cm-1
+	Real ALPM; !relative growth rates for mature and young roots                   cccz day-1
 	Real RtMinWtPerUnitArea; !minimum root weight per length (g cm-1)                   cccz g cm-2
-	Real Wl,Wa,Wr,Wb; !Weighting parameters for root growth in grid used in Root_grow_c 
 	integer ISink;        ! Determines mechanism of nitrogen uptake by root
       Real InitialRootCellArea
       integer t1,t2
@@ -327,7 +326,7 @@ c        PDWR(n)=RMassY(n)*ALPM*RGCF(n)*nodeArea(n)
 C
 C DT GLYCIM sorts on PDWR which is potential for root growth. RGCF is already
 C    taken into account.
-      Call SORT(NumNP,iFavRoot,RGCF,RVR)
+      Call SORTR(NumNP,iFavRoot,RGCF,RVR)
 C
 C
 C   Taken from TRADE  of GLYCIM
@@ -682,7 +681,7 @@ C
       Return
       End
 *********************************************************************
-      SUBROUTINE SORT(NCR,LOCATE,VALUE,RVR)
+      SUBROUTINE SORTR(NCR,LOCATE,VALUE,RVR)
 C     --------------------------( SORT )--------------------------------
 C     THIS SUBROUTINE SORTS THE CORRESPONDING ARRAYS "LOCATE" AND "VALUE"
 C     SO THAT THE ELEMENTS OF "LOCATE" GIVE NUMBERS OF ELEMENTS OF "VALUE" 

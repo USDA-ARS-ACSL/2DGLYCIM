@@ -30,7 +30,7 @@ private:
 	double Es(double T);
 	double Slope(double T);
 	double Rd();
-	double set_PSIleafeffect(double pressure, const TInitInfo info);
+	double set_PSIleafeffect(double pressure);
 	double Ci_Ca;  //!< ratio of internal to external CO2, unitless
 	double errTolerance; /*!< error tolerance for iterations */
 	double eqlTolerance; /*!< equality tolerance */

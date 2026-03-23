@@ -78,8 +78,8 @@ C**                                                                   **
 
       Parameter (PERIOD =1./24.)
 c wsun put day of year in the common block (time_public)
-      integer jday, m, CurYear, ModNum,ThisYear
-      Common /weather/ il,im,isol,ModNum, TMAX,Gamma_psy,
+      integer m, CurYear, ModNum,ThisYear
+      Common /weatherD/ il,im,isol,ModNum, TMAX,Gamma_psy,
      &   BEERS(24)
       
       double precision St,t
@@ -300,7 +300,8 @@ c
         TMAX = (CLIMAT(2) - ATEMP)/BTEMP
         TMIN = (CLIMAT(3) - ATEMP)/BTEMP
 c   dt have to fix this later as model cannot handle freezing temperatures
-        TMIN=max(TMIN,3.0)        
+        TMIN=max(TMIN,2.0)  
+        TMAX=max(TMAX,TMIN)
         RAIN = CLIMAT(4)*ERAIN
 
         If (MSW2.GT.0) then 
@@ -505,9 +506,9 @@ C
 c       Minimum tomorrow temperature
         MDAY=Julday(date)
         If (MDAY.LT.JDLAST) then
-          TMINT = (CLIMAT(3) - ATEMP)/BTEMP
+          TMINT = MAX((CLIMAT(3) - ATEMP)/BTEMP,2.0)
         Else
-          TMINT = TMIN
+          TMINT = max(TMIN, 2.0)
         ENDIf
 C
 C  YESTERDAY DUSK TEMPERATURE

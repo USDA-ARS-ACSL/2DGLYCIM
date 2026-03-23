@@ -14,7 +14,8 @@
 #include "controller.h"
 #include "weather.h"
 
-using namespace std;
+#include <iostream>
+//using namespace std;
 #include <cmath>
 #define endl "\n"
 #define comma ","
@@ -69,7 +70,7 @@ void gasexchanger_(struct
 	}
 	
 
-	double Es;
+	 double Es;
 
 	TWeather wthr;
 	{
@@ -105,6 +106,7 @@ void gasexchanger_(struct
 		//I need to transfer this to mg CO2 m-2 GROUND s-1 
 		
 		Plant->photosynthesis_gross = pSC->get_photosynthesis_gross() * (44.0/1000.0);
+		//std::cout << "Time= ";//<< wthr.time << "photosynthesis_gross = " << Plant->photosynthesis_gross << endl;
 		
 		//Plant->photosynthesis_gross = pSC->get_photosynthesis_gross()/(wthr.LAI)* (44.0 / 1000.0);
 

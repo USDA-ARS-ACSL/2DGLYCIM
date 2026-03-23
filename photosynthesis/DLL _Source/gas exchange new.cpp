@@ -64,10 +64,13 @@ void CGas_exchange_new::getParms()
 	/*********************/
 
 	
-	Parameters.Eav = 64800;
-	Parameters.Eaj = 37000;
-	Parameters.Hj = 220000;
-	Parameters.Sj = 710;
+	Parameters.Eav = 64800.0;
+	Parameters.Eaj = 37000.0;
+	Parameters.Hj = 220000.0;
+	Parameters.Sj = 710.0;
+	Parameters.Sv = 400.0; //From LEUNING temperature dependence of two parameters in a photosynthesis model Plant, Cell and Environment 
+	                        //(2002) 25,1205–1210
+	Parameters.Hv = 123386.0;
 
 	//Parameters.Vcm25 = 94; //from Dennis data, 2002: Use as of 5/ 2008
 	Parameters.Vcm25 = 72; //orginal soybean 1990 parameters from Parkhurst and Mott (1990). 
@@ -184,7 +187,7 @@ double CGas_exchange_new::gbw(void) //boundary layer conductance to vapor
 double CGas_exchange_new::gsw(double pressure, const TInitInfo info)  // stomatal conductance for water vapor in mol m-2 s-1 
 {
 	double  Pn, aa, bb, cc, Ha, Hs, Cs, Ca, gg, gamma, Ds;
-	double temp = set_PSIleafeffect(pressure, info);
+	double temp = set_PSIleafeffect(pressure);
 	//double temp = 1.00; // Right now, we don't use water stress based on water potential
     gsModel    myModel=BBW;     // need to put this in main program 
     Ca = CO2;
@@ -229,7 +232,7 @@ double CGas_exchange_new::gsw(double pressure, const TInitInfo info)  // stomata
 	}
 }
 
-double CGas_exchange_new::set_PSIleafeffect(double pressure, const TInitInfo info)
+double CGas_exchange_new::set_PSIleafeffect(double pressure)
 {
 	//Reduction in stomatal conductance using hourly bulk leaf water potential in MPa
 	double sf, phyf;
@@ -244,14 +247,11 @@ double CGas_exchange_new::set_PSIleafeffect(double pressure, const TInitInfo inf
 	 sf = 4.2; phyf = -0.5; //Optimized 05.10.2021
 	//if (pressure < -0.05) 
 	//if (pressure < phyf)
-	if (pressure < -0.2)
-		this->psileaf_stress = __max((1+exp(sf*phyf))/(1+exp(sf*(phyf-pressure))),0);
-	else psileaf_stress = 1;
-	//psileaf_stress = 1;
-	double temp = this->psileaf_stress;
-	//double temp = 1.0;
+	psileaf_stress = 1.0;
 
-	return temp;
+	if (pressure < -0.2) //if LWP <2.0 MPa, no stress
+		this->psileaf_stress = __max((1+exp(sf*phyf))/(1+exp(sf*(phyf-pressure))),0);
+		return this->psileaf_stress;
 }
 
 double CGas_exchange_new::SearchCi(double CO2i, double psileaf, const TInitInfo info)
@@ -293,7 +293,7 @@ double CGas_exchange_new::SearchCi(double CO2i, double psileaf, const TInitInfo 
 	if (iter > maxiter)
 	{
 		Ci_low = 0.0;
-		Ci_hi = 2.0*CO2;
+		Ci_hi = 2.0*CO2; 
 		isCiConverged = false;
 		while (abs(Ci_hi - Ci_low) <= errTolerance || iter > (maxiter*2))
 		{

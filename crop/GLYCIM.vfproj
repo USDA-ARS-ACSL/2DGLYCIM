@@ -18,13 +18,13 @@
 		</Configuration>
 		<Configuration Name="Release|Win32" UseCompiler="ifortCompiler" OutputDirectory="$(PorjectDir)\$(ConfigurationName)" IntermediateDirectory="$(PorjectDir)\$(ConfigurationName)" ConfigurationType="typeDynamicLibrary">
 			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="precise" RoundFloatingPointResults="true" FlushDenormalResultsToZero="true" CallingConvention="callConventionCVF" Traceback="true" BoundsCheck="true" UninitializedVariablesCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebug"/>
-			<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemWindows" LinkDLL="true" AdditionalDependencies="&quot;$(SolutionDir)Photosynthesis\$(PlatformName)\$(ConfigurationName)\GLYCIM_GasEx.lib&quot;"/>
+			<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemWindows" LinkDLL="true" AdditionalDependencies="&quot;$(SolutionDir)Photosynthesis\x64\Release\GLYCIM_GasEx.lib&quot;"/>
 			<Tool Name="VFResourceCompilerTool"/>
 			<Tool Name="VFMidlTool" SuppressStartupBanner="true"/>
 			<Tool Name="VFCustomBuildTool"/>
 			<Tool Name="VFPreLinkEventTool"/>
 			<Tool Name="VFPreBuildEventTool"/>
-			<Tool Name="VFPostBuildEventTool" CommandLine="echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;$(SolutionDir)2DSOIL\Release\$(TargetFileName)&quot;"/>
+			<Tool Name="VFPostBuildEventTool" CommandLine="echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;$(SolutionDir)2DSOIL\Release\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim_dev\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;X:\Modeling\MAIZSIMInterface\Interface programs and files\Crop Models\GLYCIM Files\$(TargetFileName)&quot;"/>
 			<Tool Name="VFManifestTool" SuppressStartupBanner="true"/>
 		</Configuration>
 		<Configuration Name="Debug|x64" UseCompiler="ifxCompiler" ConfigurationType="typeDynamicLibrary">
@@ -39,7 +39,7 @@
 			<Tool Name="VFManifestTool" SuppressStartupBanner="true"/>
 		</Configuration>
 		<Configuration Name="Release|x64" UseCompiler="ifxCompiler" ConfigurationType="typeDynamicLibrary">
-			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="precise" RoundFloatingPointResults="true" FlushDenormalResultsToZero="true" CallingConvention="callConventionCVF" Traceback="true" BoundsCheck="true" UninitializedVariablesCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebug"/>
+			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeMinSpace" FavorSizeOrSpeed="favorSpeed" BufferedIO="true" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="precise" RoundFloatingPointResults="true" FlushDenormalResultsToZero="true" CallingConvention="callConventionCVF" Traceback="true" BoundsCheck="true" UninitializedVariablesCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebug"/>
 			<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemWindows" LinkDLL="true" AdditionalDependencies="&quot;$(SolutionDir)Photosynthesis\$(PlatformName)\$(ConfigurationName)\GLYCIM_GasEx.lib&quot;"/>
 			<Tool Name="VFResourceCompilerTool"/>
 			<Tool Name="VFMidlTool" SuppressStartupBanner="true" TargetEnvironment="midlTargetAMD64"/>
@@ -68,7 +68,29 @@
 			<Tool Name="VFCustomBuildTool"/>
 			<Tool Name="VFPreLinkEventTool"/>
 			<Tool Name="VFPreBuildEventTool"/>
-			<Tool Name="VFPostBuildEventTool" CommandLine="echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;$(SolutionDir)2DSOIL\$(Platformname)\$(ConfigurationName)\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim_dev\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;X:\Modeling\MAIZSIMInterface\Interface programs and files\Crop Models\GLYCIM Files\$(TargetFileName)&quot;"/>
+			<Tool Name="VFPostBuildEventTool" CommandLine="echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;$(SolutionDir)2DSOIL\$(Platformname)\$(ConfigurationName)\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim_dev\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;X:\Modeling\MAIZSIMInterface\Interface programs and files\Crop Models\GLYCIM Files\Dev\$(TargetFileName)&quot;"/>
+			<Tool Name="VFManifestTool" SuppressStartupBanner="true"/>
+		</Configuration>
+		<Configuration Name="Dev_Classim|Win32" UseCompiler="ifortCompiler" ConfigurationType="typeDynamicLibrary">
+			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="precise" RoundFloatingPointResults="true" FlushDenormalResultsToZero="true" CallingConvention="callConventionCVF" Traceback="true" BoundsCheck="true" UninitializedVariablesCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebug"/>
+			<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemWindows" LinkDLL="true" AdditionalDependencies="&quot;$(SolutionDir)Photosynthesis\x64\Release\GLYCIM_GasEx.lib&quot;"/>
+			<Tool Name="VFResourceCompilerTool"/>
+			<Tool Name="VFMidlTool" SuppressStartupBanner="true"/>
+			<Tool Name="VFCustomBuildTool"/>
+			<Tool Name="VFPreLinkEventTool"/>
+			<Tool Name="VFPreBuildEventTool"/>
+			<Tool Name="VFPostBuildEventTool" CommandLine="echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;$(SolutionDir)2DSOIL\Release\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim_dev\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;X:\Modeling\MAIZSIMInterface\Interface programs and files\Crop Models\GLYCIM Files\$(TargetFileName)&quot;"/>
+			<Tool Name="VFManifestTool" SuppressStartupBanner="true"/>
+		</Configuration>
+		<Configuration Name="Dev_Classim|x64" UseCompiler="ifxCompiler" ConfigurationType="typeDynamicLibrary">
+			<Tool Name="VFFortranCompilerTool" SuppressStartupBanner="true" DebugInformationFormat="debugEnabled" Optimization="optimizeDisabled" LocalSavedScalarsZero="true" InitArrays="true" FloatingPointModel="precise" RoundFloatingPointResults="true" FlushDenormalResultsToZero="true" CallingConvention="callConventionCVF" Traceback="true" BoundsCheck="true" UninitializedVariablesCheck="true" StackFrameCheck="true" RuntimeLibrary="rtMultiThreadedDebug"/>
+			<Tool Name="VFLinkerTool" LinkIncremental="linkIncrementalNo" SuppressStartupBanner="true" GenerateDebugInformation="true" SubSystem="subSystemWindows" LinkDLL="true" AdditionalDependencies="&quot;$(SolutionDir)Photosynthesis\$(PlatformName)\$(ConfigurationName)\GLYCIM_GasEx.lib&quot;"/>
+			<Tool Name="VFResourceCompilerTool"/>
+			<Tool Name="VFMidlTool" SuppressStartupBanner="true" TargetEnvironment="midlTargetAMD64"/>
+			<Tool Name="VFCustomBuildTool"/>
+			<Tool Name="VFPreLinkEventTool"/>
+			<Tool Name="VFPreBuildEventTool"/>
+			<Tool Name="VFPostBuildEventTool" CommandLine="echo f | xcopy /y &quot;$(TargetPath)&quot; &quot;$(SolutionDir)2DSOIL\$(Platformname)\$(ConfigurationName)\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;%userprofile%\Documents\classim_dev\$(TargetFileName)&quot;&#xA;echo F|xcopy /y &quot;$(TargetPath)&quot; &quot;X:\Modeling\MAIZSIMInterface\Interface programs and files\Crop Models\GLYCIM Files\Dev\$(TargetFileName)&quot;"/>
 			<Tool Name="VFManifestTool" SuppressStartupBanner="true"/>
 		</Configuration>
 	</Configurations>
@@ -89,7 +111,8 @@
 			<File RelativePath=".\Math.f90"/>
 			<File RelativePath=".\Nitrogen.f90"/>
 			<File RelativePath=".\Nodule.f90"/>
-			<File RelativePath=".\Output.f90"/>
+			<File RelativePath=".\Output.f90">
+			</File>
 			<File RelativePath=".\Plant.f90"/>
 			<File RelativePath=".\Pri_Init.f90"/>
 			<File RelativePath=".\Root.f90"/>

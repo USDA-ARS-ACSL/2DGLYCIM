@@ -52,6 +52,7 @@ local.properties
 *.suo
 *.user
 *.sln.docstates
+*.fdz
 
 # Build results
 

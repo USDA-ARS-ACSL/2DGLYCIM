@@ -3,11 +3,11 @@
 *     2DSOIL  - Numerical model of two-dimensional soil environment    *
 *                           for field crops with soybean model		 *
 *																	 *
-*						 Release 3.1.2							     *
+*						 Release 3.1.3.0							     *
 *||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*
 
 	!DEC$ ATTRIBUTES DLLIMPORT:: Crop
-
+      
 	Include 'public.ins'
       include 'puplant.ins'
 	Include 'puweath.ins'
@@ -15,7 +15,7 @@
       Include 'pusurface.ins'
 
 
-	character*132 RunDat
+	character*256 RunDat
 	integer len, status
 	RunFile="Run.dat"
 	Call get_command_argument(1, RunDat, len, status)
@@ -44,6 +44,8 @@ C SetSurfaceH --  reading hourly weather
       Call AutoIrrigate()
       Call Management()
       Call Irrigation()
+      Call PondedIrrigationByHead()
+      Call PondedIrrigationByFlux()
 	Call TillageProcess
 c	Call Drip()
 

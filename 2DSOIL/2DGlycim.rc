@@ -81,14 +81,14 @@ BEGIN
 #else
     VALUE "InternalName", "2DSOIL_RELEASE"
 #endif
-    VALUE "LegalCopyright", "Copyright (C) 2024"
+    VALUE "LegalCopyright", "Copyright (C) 2026"
     VALUE "OriginalFilename", "2DSOIL"
 #ifdef _DEBUG
     VALUE "ProductName", "GLYCIM DEBUG"
 #else
     VALUE "ProductName", "GLYCIM RELEASE"
 #endif
-    VALUE "ProductVersion", "3.1.2.0"
+    VALUE "ProductVersion", "3.1.3.0"
     END
     END
     BLOCK "VarFileInfo"

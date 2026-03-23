@@ -90,11 +90,11 @@ c inputs hourly data
       real Interval, HRAIN,HSR,HTEMP, HTEMPY,HWIND,Rel_Humid,
      &     BEERS 
       character*10 date
-      Common /weather/ il,im,HRAIN(24),HSR(24),HTEMP(24),HTEMPY(24), 
+      Common /weatherH/ il,im,HRAIN(24),HSR(24),HTEMP(24),HTEMPY(24), 
      &     HWIND(24), Rel_Humid(24),isol,Date1,ModNum,
      &     Interval, TWET(24),TDRY(24), AVP(24), GAMMA_psy(24),
      &     SVPW(24), TMAX,BEERS(24)
-      
+C check for TMin in public.ins      
       Dimension CLIMAT(20),SDERP(9),SINALT(24),SINAZI(24),HRANG(24),
      &           SARANG(24),
      &           SOLALT(24),SOLAZI(24),
@@ -300,6 +300,7 @@ C
 c
 c..................... Routine calculations
 
+
 c..................... Input daily data
    11 If((linput.eq.1).OR.idint(t+St).eq.(JDAY+1)) then
       
@@ -403,6 +404,7 @@ c RI should be total J m-2 -- work in Watts * time = total energy
 
 
 c......................... Radiation submodel
+C this block only in GLYCIM - need to check why
 C WSUN  add DLNGMAX in order to use in crop (phenology section) 
 	 If(lInput.eq.1) then
 	  XLAT = LATUDE*DEGRAD
@@ -515,7 +517,8 @@ C
         IHPERD = IPERD/2
         Do 20, J = 1,IHPERD
           HRANG(J) = PI/12.0*(12 - J + 0.5)
- 20     HRANG(IPERD - J + 1) = HRANG(J)
+          HRANG(IPERD - J + 1) = HRANG(J)
+ 20     Continue
         DDIf = DAYLNG - (2.0*IfIX(DAYLNG/2))
         IUP = 13 - IfIX(DAYLNG/2)
         IDN = 12 + (13 - IUP)

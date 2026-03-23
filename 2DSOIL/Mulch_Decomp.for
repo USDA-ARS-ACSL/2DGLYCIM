@@ -109,6 +109,7 @@ c         bbbb                    dummy variable, receive unwanted data.
        double precision 
      !   PC_mulch, PN_mulch, alpha_F,
      !   K_CARB, K_CELL, K_LIGN,
+       
      !   K_CARB_temp, K_CELL_temp, K_LIGN_temp,       
      !   ThetaV_2_ThetaM, 
      !   INKG, CNR,
@@ -133,7 +134,8 @@ c         bbbb                    dummy variable, receive unwanted data.
      !   Nim_total_decomp,Nmine_total_decomp,Nhumi_total_decomp,
      !   Nim_cumu_decomp,Nmine_cumu_decomp,Nhumi_cumu_decomp,
      !   Mulch_Decompose,local_soil_mass,
-     !   totalMulchC_final, totalMulchN_final  
+     !   totalMulchC_final, totalMulchN_final,
+     !   FOMN_Humi,CO2_to_Air
        double precision N_Quan_Left,N_Quan_Right,
      !   Length_Left_Frac,Length_Right_Frac  
        Character InString_mulch*132
@@ -245,7 +247,7 @@ c    just need to run the function once
           bbbb=WQ_CERES_MULCH(-100.0D0,0.1D0,0.1D0,-1)
           LocalFlag_MulchDecomp_Start=0 
           LocalFlag_MulchDecomp_FinalAssign=0
-         if(Crit_Level.eq.0) then ! that means we do not want to have decomposition
+         if(Crit_Level.le.1.0D-5) then ! that means we do not want to have decomposition
              DecompCtrl=0
          endif    
       EndIf
@@ -253,7 +255,7 @@ c    just need to run the function once
 c---------------------------- finish the input --------------------------------------------------------------------------------
 cccz initialization step 2: REAL INITIALIZATION, occur once when the mulch starting time is hitted
 c    the residue mulch is established at this time step
-c    the trager will be  "MulchDecompIni.eq.1"
+c    the trigger will be  "MulchDecompIni.eq.1"
 
        IF(MulchDecompIni.eq.1
      &     .and.LocalFlag_MulchDecomp_Start.eq.0) then               ! double ensure this seciton will be only executed once
@@ -363,7 +365,7 @@ cccz check the contact layer and non-contact layer
           Frac_Crit_Layer=max(Frac_Crit_Layer,0.0D0)
          endif 
         endif 
-       enddo   
+       enddo  ! end mulchlayer loop    
        
 cccz calculate decomposition fraction based on
        do jj=1,mulchLayer
@@ -401,17 +403,18 @@ cccz --------------------- calculate the inorganic N from soil that availiable f
           else
             Length_Right_Frac=0.5D0
           endif
-          ! cccz we need to notice the unit of NNO3 and NNH4
-          N_Quan_Left=(NNO3_old(qLeft)
-     &      +NNH4(qLeft))
+          ! cccz we need to notice the unit of NO3 and NH4
+          N_Quan_Left=(NO3_old(qLeft)
+     &      +NH4(qLeft))
      &      *nodeArea(qLeft)*Length_Left_Frac
      &      *1.0D-6                                                ! convert "\mu g" to "g"
-          N_Quan_Right=(NNO3_old(qRight)
-     &      +NNH4(qRight))
+          N_Quan_Right=(NO3_old(qRight)
+     &      +NH4(qRight))
      &      *nodeArea(qRight)*Length_Right_Frac       
      &      *1.0D-6                                                 ! convert "\mu g" to "g"
           INKG=INKG+N_Quan_Left+N_Quan_Right    
-        enddo  
+        enddo  ! end kkk=0,SurNodeIndex_M_Match(kk+1)-1
+C ---------------------------------------------
         
         do jj=1,Crit_Layer
           thick_cont=thick_cont+thickPerLayer(jj)  
@@ -430,8 +433,8 @@ cccz --------------------- calculate the inorganic N from soil that availiable f
           CARB_N_mass_cont=CARB_N_mass_cont+CARB_N_mass(jj,kk)
           CELL_N_mass_cont=CELL_N_mass_cont+CELL_N_mass(jj,kk)
           LIGN_N_mass_cont=LIGN_N_mass_cont+LIGN_N_mass(jj,kk)
-        enddo
-        
+        enddo !end jj loop 1 to Crit_Layer
+C------------------------------------------         
         if(Crit_Layer.lt.mulchLayer.and.Frac_Crit_Layer.gt.0.0D0) then
          jj=Crit_Layer+1
          thick_cont=thick_cont+thickPerLayer(jj)*Frac_Crit_Layer
@@ -457,7 +460,7 @@ cccz --------------------- calculate the inorganic N from soil that availiable f
      &    +CELL_N_mass(jj,kk)*Frac_Crit_Layer   
          LIGN_N_mass_cont=LIGN_N_mass_cont
      &    +LIGN_N_mass(jj,kk)*Frac_Crit_Layer  
-        endif
+        endif ! end if Crit_Layer.lt.mulchLayer
               
         HNew_m=-exp(HNew_m/thick_cont)
         HNew_m=HNew_m*0.0000980665D0                  !cccz convert “cm” water potential to “Mpa”
@@ -527,7 +530,9 @@ cccz ---------------------- sum over the horizontal scale, (equivalent to) take 
         Nmine_total_decomp=Nmine_total_decomp+FOMN_Decomp*Step
         Nhumi_total_decomp=Nhumi_total_decomp+FOMN_Humi*Step
 
-       enddo    
+       enddo    ! end kk loop 1 to SurNodeIndex_M-1
+     
+C ----------------------------------------           
       
        Nim_cumu_decomp=Nim_cumu_decomp+Nim_total_decomp               ! go back to CARB_N
        Nmine_cumu_decomp=Nmine_cumu_decomp+Nmine_total_decomp         ! N outlet
@@ -609,7 +614,7 @@ cccz layer in contact level
            LIGN_N_mass_non_cont=LIGN_N_mass_non_cont+LIGN_N_mass(jj,kk)
           enddo
          enddo
-        endif 
+        endif ! end if mulchLayer.gt.Crit_Layer+1  
         bbbb=Frac_Decomp_0(Crit_Layer+1)
         CARB_mass_chg=CARB_total_decomp_R
      &      -bbbb*CARB_mass_non_cont
@@ -673,12 +678,12 @@ cccz update the organic matter and N pools (this is the propotional part)
            LIGN_N_mass(jj,kk)=bbbb*LIGN_N_mass(jj,kk)
          enddo
         enddo
-        endif
+        endif ! end if mulchLayer.gt.Crit_Layer+1
         jj=Crit_Layer+1
         Frac_Decomp(jj)=(1-Frac_Crit_Layer)*Frac_Decomp(jj)
      &    +Frac_Crit_Layer*Frac_Decomp_Crit
 
-      else
+      else !else for nulchlayer > crit_layer
 cccz update the mass fraction of each carbon component
 cccz layers in contact level 
        do jj=1,mulchLayer       
@@ -695,7 +700,7 @@ c note N is not participate on the Frac_Decomp, hence not related to shrinking
           LIGN_N_mass(jj,kk)=LIGN_N_mass(jj,kk)-LIGN_total_decomp_N*bbbb
          enddo          
         enddo
-       endif 
+       endif  ! end mulchLayer.gt.Crit_Layer) 
 
 c ---------------------------- output of N (whole surface) --------------------------------------------------------
 c the data exchange interface between mulch N to soil N

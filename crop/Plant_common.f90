@@ -24,29 +24,37 @@ Parameter(NumNPD = 4000, NumElD = 3500, NumBPD = 600, NSeepD = 2,      &
     NumModD = 20, MBandD = 15, NumSurfDatD = 3 + NumGD + NumSD) 
 
 
-    REAL PCRL, PCRQ, PCRS, PCRTS, ET_demand, LCAI, COVER, CONVR,       &
-		 POPROW
+    REAL PCRL, PCRQ, PCRS, ET_demand, LCAI, COVER,  CONVR,             &
+         MaxRootDepth,SHADE, HEIGHT, LAI, AWUPS,                       &
+         NitroDemand,xBSTEM, yBSTEM, SGT, PSIM,                        &
+		  LAREAT, POPROW,ROWSP,ROWANG,PopArea, CEC,EORSCS,             &
+          AWUPSS, SOLRAD, Total_Eor, Total_Pcrs, sincrsink, PSILD,     &
+          OSMFAC, EOMULT, PSIL_,  NDemandError,                         &
+               CumulativeNDemandError,                                 &
+               InitialRootCarbo, PCRTS,                                &
+               ConstI(2),constK(2), Cmin0(2) 
+    
+          
     Real(8) HourlyCarboUsed, TotalRootWeight
-    REAL(4) SHADE, HEIGHT, LAI, AWUPS, NitroDemand, NDemandError
-    REAL LAREAT, MaxRootDepth, InitialRootCarbo
     integer isGerminated, isEmerged
-
+    REAL cContentRootY,nContentRootY,cContentRootM,nContentRootM
 
     Common / ShootR / PCRL, PCRQ, PCRS, HourlyCarboUsed, ET_demand,     &
                LCAI, COVER, CONVR,                                      &
                MaxRootDepth, SHADE, HEIGHT, LAI, AWUPS,                 &
-               NitroDemand, xBSTEM, yBSTEM, SGT, PSIM,                  &
+               NitroDemand,   xBSTEM, yBSTEM, SGT, PSIM,                &
                LAREAT, POPROW, ROWSP, ROWANG, PopArea,                  &
                CEC, EORSCS, AWUPSS, SOLRAD,                             &
                Total_Eor, Total_Pcrs, sincrsink, PSILD,                 &
                OSMFAC, EOMULT, PSIL_, NDemandError,                     &
-               CumulativeNDemandError, TotalRootWeight,                 &
+               CumulativeNDemandError,TotalRootWeight,                  &
                InitialRootCarbo, PCRTS,                                 &
-               ConstI(2), constK(2), Cmin0(2),                          &
+               ConstI,constK, Cmin0,                                    &
                isGerminated, isEmerged
+               
     REAL RVR, AWUP, PSISM, PSILT, EOR, YRL, RGCF,                       &
                PSIS, TS, COND, PDWR, DRL, WUPM, WUPN, WUPT, TPL, PPDRL, &
-        ADWR, AWR, ADRL, RTWL,RtMinWtPerUnitArea, Wl, Wa, Wr, Wb, ALPY, &
+        ADWR, AWR, ADRL, RTWL, ALPY,                                    &
       WidthE, HeightE, PILD, VMAX, vegsrc, potential_T, potential_T_EO, &
             AWUPS_old, WUPMS, EORSCF, WUPDS, WUP2S, WUP0S, DPSI02, SCF, &
             PSIST, PROPAR, VUP, FUP
@@ -58,13 +66,15 @@ Parameter(NumNPD = 4000, NumElD = 3500, NumBPD = 600, NSeepD = 2,      &
                DRL(NumNPD), WUPM(NumNPD),                               &
                WUPN(NumNPD), WUPT(NumNPD), TPL, PPDRL(NumNPD),          &
                ADWR(NumNPD), AWR(NumNPD), ADRL(NumNPD), RTWL,           &
-               RtMinWtPerUnitArea, Wl, Wa, Wr, Wb, ALPY,                &
+               ALPY,                                                    &
                WidthE(NumEld), HeightE(NumEld),                         &
                PILD, VMAX, vegsrc, potential_T,                         &
                potential_T_EO,                                          &
                AWUPS_old, WUPMS, EORSCF, WUPDS, WUP2S,                  &
                WUP0S, DPSI02, SCF, PSIST, PROPAR,                       &
-               VUP(NumNPD, 2), FUP(NumNPD, 2)
+               VUP(NumNPD, 2), FUP(NumNPD, 2),                          &
+               cContentRootM,cContentRootY,                             &
+               nContentRootM, nContentRootY
 
     Integer MSW1, MSW2, MSW3, MSW4, MSW5, MSW6, MSW7
     REAL BSOLAR, ETCORR, BTEMP, ATEMP, ERAIN, BWIND, BIR, WINDA, IRAV
@@ -106,6 +116,7 @@ Parameter(NumNPD = 4000, NumElD = 3500, NumBPD = 600, NSeepD = 2,      &
     REAL hNew, ThNew, Vx, Vz, Q, Conc, g, Tmpr, Con, TcsXX, RO,        &
     hNew_org, QAct, ThetaAvail, ThetaFullRZ, ThAvail, ThFull,            &
     QGas, ThetaAir
+    
     Logical*1 lOrt
 
     Common /nodal_public/ NumSol, NumG, ListN(NumNPD), ListNE(NumNPD), &
@@ -120,13 +131,13 @@ Parameter(NumNPD = 4000, NumElD = 3500, NumBPD = 600, NSeepD = 2,      &
 	REAL  cSink, gSink               
     REAL  tSink, RTWT, RMassM, RDenM,                                  &
     RMassY, RDenY, gSink_OM, gSink_root, gsink_N2O,                    &
-    gSink_rootY, gSink_rootM, FracClay
+    gSink_rootY, gSink_rootM, FracClay, cSink_OM
 
     Common / elem_public / MatNumE(NumElD), Sink(NumNPD),              &  
       cSink(NumNPD, NumSD), gSink(NumNPD, NumGD), tSink(NumNPD),       &  
       RTWT(NumNPD), RMassM(NumNPD), RDenM(NumNPD),     & 
       RMassY(NumNPD), RDenY(NumNPD),                                   &
-      gSink_OM(NumNPD, NumGD),                                         &
+      gSink_OM(NumNPD, NumGD), cSink_OM(NumNPD,NumSD),                 &
       gSink_root(NumNPD, NumGD), gSink_rootY(NumNPD, NumGD),           &
       gSink_rootM(NumNPD, NumGD), gSink_N2O(NumNPD, NumGD)
 

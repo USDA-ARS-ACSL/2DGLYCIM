@@ -3,8 +3,8 @@ Cdt N in 2DSOIL is nitrate (NO3) and the units are ug per cm3 or milligram/liter
        Subroutine Nitrogen_Mass_Balance()
         include 'public.ins'
         include 'nitvar.ins'
-        include 'puplant.ins' 
-        Include 'PuSurface.ins'  
+        include 'puplant.ins'
+        Include 'PuSurface.ins'
         Dimension Bi(3),Ci(3)
         Character*10 Date
         Real AE,Profile_N,Manure_N,Litter_N,
@@ -17,6 +17,7 @@ C variables to hold mulch C and N totals
      &    t_Mulch_Thick,
      &    humusC, litterC, manureC, 
      &    All_C, CHumusMean,CLitterMean, CManureMean
+        Double Precision t
      
         common /N_BAL/ModNum,CFlux,CFluxPrevious,C_RespirationOM,
      !    C_RespirationRoot
@@ -85,8 +86,8 @@ cccz why "mg"??????????????????????????????????????????????????????
 csun Calculate the co2 the units are ug
 	   do i=1,NumNP
 C gsink_OM and gSink_root unit is ug CO2 cm-3 air, need to calculate all C_RespirationOM (ugC/domain)		   
-		   C_RespirationOM=C_RespirationOM+gsink_OM(i,1)*Step*12.0*nodeArea(i)
-     !       *soilair(i)/(44.0)
+		   C_RespirationOM=C_RespirationOM+gsink_OM(i,1)*
+     !        Step*12.0*nodeArea(i)*soilair(i)/(44.0)
              C_RespirationRoot=C_RespirationRoot+gSink_root(i,1)*
      !       Step*12.0*nodeArea(i)*soilair(i)/(44.0)
 	   enddo
@@ -165,9 +166,9 @@ c  organic N is in ug/cm3 of volume, don't need BD order to sum over volume
      &             +Cm(j)
      &             +Cm(l))/3.
 
-               NAmmoniaMean=NAmmoniaMean+AE*(NNH4(i)
-     &             +NNH4(j)
-     &             +NNH4(l))/3.
+               NAmmoniaMean=NAmmoniaMean+AE*(NH4(i)
+     &             +NH4(j)
+     &             +NH4(l))/3.
                NDenitrifyMean=NDenitrifyMean+AE*(Denit(i)
      &             +denit(j)
      &             +denit(l))/3.

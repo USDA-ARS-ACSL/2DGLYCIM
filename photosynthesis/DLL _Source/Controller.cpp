@@ -1,3 +1,4 @@
+
 #pragma once
 #include "pch.h"
 #include "Controller.h"
@@ -6,6 +7,8 @@
 #include "solar.h"
 #include "math.h"
 #include <vector>
+using namespace std;
+
 
 
 CController::CController()
@@ -117,5 +120,5 @@ int CController::run(const TWeather & weather, const TInitInfo info)
 	delete light;
 
 
-	return (photosynthesis_gross, photosynthesis_net and transpiration);
+	return 0;
 }
